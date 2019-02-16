@@ -27,9 +27,9 @@
 </nav>
 
 <div fxLayout="row" fxLayoutAlign="center center">
-  <div fxflex="100">
-    <mat-list>
-      <app-employee></app-employee>
+  <div>
+    <mat-list *ngFor="let employee of employees">
+        <app-employee [employee]="employee"></app-employee>
     </mat-list>
   </div>
 </div>

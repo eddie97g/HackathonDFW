@@ -1,3 +1,4 @@
+import { EmployeeService } from './services/employee.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {MatListModule} from '@angular/material/list';
@@ -8,6 +9,7 @@ import { AppComponent } from './app.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HomeComponent } from './home/home.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
    declarations: [
@@ -19,10 +21,12 @@ import { EmployeeComponent } from './employee/employee.component';
       BrowserModule,
       MatListModule,
       BrowserAnimationsModule,
-      FlexLayoutModule
+      FlexLayoutModule,
+      HttpClientModule
    ],
    providers: [
-      JwtHelperService
+      JwtHelperService,
+      EmployeeService
    ],
    bootstrap: [
       AppComponent

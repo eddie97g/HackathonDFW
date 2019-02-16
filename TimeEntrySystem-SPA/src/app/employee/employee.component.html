@@ -1,8 +1,10 @@
 <mat-list-item>
   <img matListAvatar src="http://www.schwarzkopf.international/content/dam/schwarzkopf/international/en/brands/men_perfect/home/thumbnails/men_perfect_com_thumbnails_home_pack_400x400.jpg" alt="employee1">
-  <h3 matLine fxLayoutAlign="center center"> Eduardo Gonzalez Jr </h3>
+  <h3 matLine> {{ employee.firstName }} {{ employee.lastName }} </h3>
   <p matLine>
-      <span class="clocked-in"></span>
-      <span> Software Engineer </span>
+      <span *ngIf="employee.status === 'in'" class="clocked-in"></span>
+      <span *ngIf="employee.status === 'out'" class="clocked-out"></span>
+      <span *ngIf="employee.status === 'break'" class="on-break"></span>
+      <span> {{ employee.position }} </span>
   </p>
 </mat-list-item>
