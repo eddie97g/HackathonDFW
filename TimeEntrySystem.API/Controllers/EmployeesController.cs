@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TimeEntrySystem.API.Data;
+using TimeEntrySystem.API.Dtos;
 using TimeEntrySystem.API.Models;
 
 namespace TimeEntrySystem.API.Controllers
@@ -24,8 +25,8 @@ namespace TimeEntrySystem.API.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> ClockIn(int id, int pin, string status) {
-            var employee = await _repo.ClockIn(id, pin, status);
+        public async Task<IActionResult> ClockIn(int id, [FromBody]EmployeeForTimeEntryDto employeeForTimeEntryDto) {
+            var employee = await _repo.ClockIn(id, employeeForTimeEntryDto);
             if (employee == null) return StatusCode(500);
             return StatusCode(200);
         }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TimeEntrySystem.API.Dtos;
 using TimeEntrySystem.API.Models;
 
 namespace TimeEntrySystem.API.Data
@@ -8,6 +9,6 @@ namespace TimeEntrySystem.API.Data
     {
          Task<List<Employee>> GetEmployees();
 
-         Task<Employee> ClockIn(int id, int pin, string status);
+         Task<Employee> ClockIn(int id, EmployeeForTimeEntryDto employeeForTimeEntryDto);
     }
 }
