@@ -23,29 +23,12 @@ namespace TimeEntrySystem.API.Controllers
             return employees;
         }
 
-        // // GET api/values/5
-        // [HttpGet("{id}")]
-        // public ActionResult<string> Get(int id)
-        // {
-        //     return "value";
-        // }
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> ClockIn(int id, int pin, string status) {
+            var employee = await _repo.ClockIn(id, pin, status);
+            if (employee == null) return StatusCode(500);
+            return StatusCode(200);
+        }
 
-        // // POST api/values
-        // [HttpPost]
-        // public void Post([FromBody] string value)
-        // {
-        // }
-
-        // // PUT api/values/5
-        // [HttpPut("{id}")]
-        // public void Put(int id, [FromBody] string value)
-        // {
-        // }
-
-        // // DELETE api/values/5
-        // [HttpDelete("{id}")]
-        // public void Delete(int id)
-        // {
-        // }
     }
 }

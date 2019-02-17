@@ -9,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class EmployeeComponent implements OnInit {
   @Input() employee: any;
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor() { }
 
   ngOnInit() {
 

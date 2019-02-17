@@ -16,6 +16,8 @@ namespace TimeEntrySystem.API.Models
         public string Role { get; set; }
 
         public double HourlyPay { get; set; }
+
+        public int PIN { get; set; }
         
     }
 }
