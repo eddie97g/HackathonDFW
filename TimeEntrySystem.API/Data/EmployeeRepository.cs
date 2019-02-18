@@ -22,11 +22,23 @@ namespace TimeEntrySystem.API.Data
             return employees;
         }
 
-        public async Task<Employee> ClockIn(int id, EmployeeForTimeEntryDto employeeForTimeEntryDto) {
-            System.Diagnostics.Debug.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        public async Task<Employee> TimeEntry(int id, EmployeeForTimeEntryDto employeeForTimeEntryDto) {
             var employee = await _context.Employees.FirstOrDefaultAsync(emp => emp.Id == id);
-            if (employee.PIN == 1234) {
-                employee.Status = employeeForTimeEntryDto.Status;
+            if (employee.PIN == employeeForTimeEntryDto.PIN) {
+                if (employee.Status == employeeForTimeEntryDto.Status) return null;
+
+                else if (employee.Status == "in" && (employeeForTimeEntryDto.Status == "out" || employeeForTimeEntryDto.Status == "break")){
+                    employee.Status = employeeForTimeEntryDto.Status;
+                }
+                else if (employee.Status == "break" && employeeForTimeEntryDto.Status == "in") {
+                    employee.Status = employeeForTimeEntryDto.Status;
+                }
+                else if (employee.Status == "out" && employeeForTimeEntryDto.Status == "in") {
+                    employee.Status = employeeForTimeEntryDto.Status;
+                }
+                else {
+                    return null;
+                }
                 
                 _context.Employees.Update(employee);
                 await _context.SaveChangesAsync();

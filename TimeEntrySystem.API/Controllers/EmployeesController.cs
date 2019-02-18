@@ -25,8 +25,8 @@ namespace TimeEntrySystem.API.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> ClockIn(int id, [FromBody]EmployeeForTimeEntryDto employeeForTimeEntryDto) {
-            var employee = await _repo.ClockIn(id, employeeForTimeEntryDto);
+        public async Task<IActionResult> TimeEntry(int id, [FromBody]EmployeeForTimeEntryDto employeeForTimeEntryDto) {
+            var employee = await _repo.TimeEntry(id, employeeForTimeEntryDto);
             if (employee == null) return StatusCode(500);
             return StatusCode(200);
         }

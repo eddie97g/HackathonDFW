@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TimeEntrySystem.API.Data;
+using TimeEntrySystem.API.Dtos;
+using TimeEntrySystem.API.Models;
 
 namespace TimeEntrySystem.API.Controllers
 {
@@ -20,12 +22,15 @@ namespace TimeEntrySystem.API.Controllers
             _repo.DeleteEmployee(id);
         }
 
-        // [HttpGet("{id}")]
-        // public async Task< Get(int id) {
-        //     var employee = await _repo.ReadEmployee(id);
-        //     if (employee == null) { return StatusCode(401); }
-        //     return 
+        [HttpGet("{id}")]
+        public async Task<Employee> Get(int id) {
+            var employee = await _repo.ReadEmployee(id);
+            return employee;
+        }
 
+        // [HttpPost]
+        // public Task<IActionResult> Create(EmployeeForCreationDto employeeForCreationDto) {
+            
         // }
     }
 }

@@ -8,8 +8,13 @@ import { EmployeeService } from '../services/employee.service';
 })
 export class HomeComponent implements OnInit {
   employees: any;
+  public now: Date = new Date();
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService) { 
+    setInterval(() => {
+      this.now = new Date();
+    }, 1);
+  }
 
   ngOnInit() {
     this.getEmployees();

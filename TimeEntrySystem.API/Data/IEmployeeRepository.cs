@@ -9,6 +9,6 @@ namespace TimeEntrySystem.API.Data
     {
          Task<List<Employee>> GetEmployees();
 
-         Task<Employee> ClockIn(int id, EmployeeForTimeEntryDto employeeForTimeEntryDto);
+         Task<Employee> TimeEntry(int id, EmployeeForTimeEntryDto employeeForTimeEntryDto);
     }
 }
