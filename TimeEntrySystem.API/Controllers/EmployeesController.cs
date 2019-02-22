@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using TimeEntrySystem.API.Data;
 using TimeEntrySystem.API.Dtos;
+using TimeEntrySystem.API.Hubs;
 using TimeEntrySystem.API.Models;
 
 namespace TimeEntrySystem.API.Controllers
@@ -12,8 +14,10 @@ namespace TimeEntrySystem.API.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeRepository _repo;
-        public EmployeesController(IEmployeeRepository repo)
+        private readonly IHubContext<EntryHub> _hubContext;
+        public EmployeesController(IEmployeeRepository repo, IHubContext<EntryHub> hubContext)
         {
+            _hubContext = hubContext;
             _repo = repo;
         }
 
@@ -25,9 +29,11 @@ namespace TimeEntrySystem.API.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> TimeEntry(int id, [FromBody]EmployeeForTimeEntryDto employeeForTimeEntryDto) {
+        public async Task<IActionResult> TimeEntry(int id, [FromBody]EmployeeForTimeEntryDto employeeForTimeEntryDto)
+        {
             var employee = await _repo.TimeEntry(id, employeeForTimeEntryDto);
             if (employee == null) return StatusCode(500);
+            await _hubContext.Clients.All.SendAsync("sendToAll");
             return StatusCode(200);
         }
 
